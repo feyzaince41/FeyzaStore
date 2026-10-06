@@ -1,0 +1,66 @@
+﻿@model List<FeyzaStore.MVC.Models.OrderViewModel>
+
+@{
+    ViewData["Title"] = "Siparişlerim";
+}
+
+<div class="container py-5">
+
+    <h1 class="mb-4">Siparişlerim</h1>
+
+    @foreach (var order in Model)
+    {
+        <div class="card mb-4">
+
+            <div class="card-header">
+                <strong>Sipariş #@order.Id</strong>
+            </div>
+
+            <div class="card-body">
+
+                <p>
+                    <strong>Tarih:</strong>
+                    @order.OrderDate.ToString("dd.MM.yyyy HH:mm")
+                </p>
+
+                <p>
+                    <strong>Durum:</strong>
+                    @order.Status
+                </p>
+
+                <p>
+                    <strong>Toplam:</strong>
+                    @order.TotalPrice.ToString("N2") TL
+                </p>
+
+                <hr />
+
+                @foreach (var item in order.Items)
+                {
+                    <div class="d-flex align-items-center mb-3">
+
+                        <img src="@($"https://localhost:7108{item.ImageUrl}")"
+                             alt="@item.ProductName"
+                             style="width: 100px; height: 100px; object-fit: cover;"
+                             class="me-3 rounded" />
+                        
+                        <div>
+                            <h5>@item.ProductName</h5>
+
+                            <p class="mb-1">
+                                Adet: @item.Quantity
+                            </p>
+
+                            <p class="mb-0">
+                                Birim Fiyat: @item.UnitPrice.ToString("N2") TL
+                            </p>
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+
+</div>

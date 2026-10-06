@@ -1,0 +1,117 @@
+﻿@model List<FeyzaStore.MVC.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Ürünler";
+}
+
+<section class="py-5 bg-light">
+    <div class="container">
+
+        <!-- Başlık -->
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">Ürünlerimiz</h1>
+
+            <p class="text-muted">
+                FeyzaStore'un özenle seçilmiş ürünlerini keşfedin.
+            </p>
+        </div>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-info text-center">
+                Henüz ürün bulunmamaktadır.
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+
+                @foreach (var product in Model)
+                {
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+
+                        <div class="card h-100 border-0 shadow-sm">
+
+                            <!-- Ürün Görseli -->
+                            <a asp-controller="Product"
+                               asp-action="Detail"
+                               asp-route-id="@product.Id"
+                               class="text-decoration-none">
+
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <div class="bg-white d-flex align-items-center justify-content-center"
+                                         style="height:300px; padding:15px;">
+
+                                        <img src="@($"https://localhost:7108{product.ImageUrl}")"
+                                             alt="@product.Name"
+                                             style="
+                                                width:100%;
+                                                height:100%;
+                                                object-fit:contain;
+                                             " />
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="bg-white d-flex align-items-center justify-content-center"
+                                         style="height:300px;">
+
+                                        <span class="text-muted">
+                                            Ürün görseli yok
+                                        </span>
+
+                                    </div>
+                                }
+
+                            </a>
+
+                            <!-- Ürün Bilgileri -->
+                            <div class="card-body d-flex flex-column">
+
+                                <!-- Kategori -->
+                                <small class="text-success mb-2">
+                                    @product.CategoryName
+                                </small>
+
+                                <!-- Ürün Adı -->
+                                <h5 class="card-title fw-bold">
+                                    @product.Name
+                                </h5>
+
+                                <!-- Açıklama -->
+                                <p class="card-text text-muted small">
+                                    @product.Description
+                                </p>
+
+                                <!-- Fiyat ve Buton -->
+                                <div class="mt-auto">
+
+                                    <h5 class="text-success fw-bold mb-3">
+                                        @product.Price.ToString("N2") TL
+                                    </h5>
+
+                                    <a asp-controller="Product"
+                                       asp-action="Detail"
+                                       asp-route-id="@product.Id"
+                                       class="btn btn-outline-success w-100">
+
+                                        Ürünü İncele
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+
+    </div>
+</section>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Ürün Resmi Yükle";
+}
+
+<div class="container mt-5">
+
+    <h2>Ürün Resmi Yükle</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+
+    <form asp-area="Admin"
+          asp-controller="Product"
+          asp-action="UploadImage"
+          method="post"
+          enctype="multipart/form-data">
+
+        <input type="hidden"
+               name="productId"
+               value="@ViewBag.ProductId" />
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Ürün Resmi
+            </label>
+
+            <input type="file"
+                   name="file"
+                   class="form-control"
+                   accept=".jpg,.jpeg,.png" />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary">
+            Resmi Yükle
+        </button>
+
+    </form>
+
+</div>

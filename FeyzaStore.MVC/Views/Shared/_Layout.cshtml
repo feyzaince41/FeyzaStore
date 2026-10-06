@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <title>
+        @ViewData["Title"] - FeyzaStore
+    </title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="~/assets/css/bootstrap.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="~/assets/css/fontawesome.min.css" />
+
+    <!-- Zay Template -->
+    <link rel="stylesheet"
+          href="~/assets/css/templatemo.css" />
+
+    <link rel="stylesheet"
+          href="~/assets/css/custom.css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+
+        <div class="container">
+
+            <!-- LOGO -->
+            <a class="navbar-brand text-success logo h1 align-self-center"
+               asp-area=""
+               asp-controller="Home"
+               asp-action="Index">
+                FeyzaStore
+            </a>
+
+            <button class="navbar-toggler border-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#templatemo_main_nav">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse"
+                 id="templatemo_main_nav">
+
+                <!-- SOL MENÜ -->
+                <ul class="nav navbar-nav d-flex flex-grow-1 justify-content-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-area=""
+                           asp-controller="Home"
+                           asp-action="Index">
+                            Ana Sayfa
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-area=""
+                           asp-controller="Product"
+                           asp-action="Index">
+                            Ürünler
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-area=""
+                           asp-controller="Home"
+                           asp-action="About">
+                            Hakkımızda
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-area=""
+                           asp-controller="Home"
+                           asp-action="Contact">
+                            İletişim
+                        </a>
+                    </li>
+
+                    <!-- SADECE ADMIN -->
+                    @if (User.Identity?.IsAuthenticated == true &&
+                         User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+
+                            <a class="nav-link text-success fw-bold"
+                               asp-area="Admin"
+                               asp-controller="Home"
+                               asp-action="Index">
+
+                                Admin Paneli
+
+                            </a>
+
+                        </li>
+                    }
+
+                </ul>
+
+
+                <!-- SAĞ MENÜ -->
+                <div class="navbar align-self-center d-flex">
+
+                    <!-- SEPET -->
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a class="nav-icon position-relative text-decoration-none me-3"
+                           asp-area=""
+                           asp-controller="Cart"
+                           asp-action="Index">
+
+                            <i class="fa fa-fw fa-cart-arrow-down text-dark"></i>
+
+                        </a>
+                    }
+
+
+                    <!-- GİRİŞ YAPILMIŞSA -->
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <div class="d-flex align-items-center gap-3">
+
+                            <!-- Kullanıcı bilgisi -->
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <span class="text-success fw-bold">
+                                    Admin
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">
+                                    Kullanıcı
+                                </span>
+                            }
+
+
+                            <!-- ÇIKIŞ -->
+                            <form asp-area=""
+                                  asp-controller="Account"
+                                  asp-action="Logout"
+                                  method="post"
+                                  class="d-inline">
+
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm">
+
+                                    Çıkış Yap
+
+                                </button>
+
+                            </form>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- GİRİŞ YAP -->
+                        <a asp-area=""
+                           asp-controller="Account"
+                           asp-action="Login"
+                           class="btn btn-outline-success btn-sm me-2">
+
+                            Giriş Yap
+
+                        </a>
+
+                        <!-- KAYIT OL -->
+                        <a asp-area=""
+                           asp-controller="Account"
+                           asp-action="Register"
+                           class="btn btn-success btn-sm">
+
+                            Kayıt Ol
+
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- SAYFA İÇERİĞİ -->
+    <main>
+        @RenderBody()
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-dark"
+            id="tempaltemo_footer">
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- FEYZASTORE -->
+                <div class="col-md-4 pt-5">
+
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">
+                        FeyzaStore
+                    </h2>
+
+                    <p class="text-light">
+                        Modern ve şık ürünleri keşfedin.
+                    </p>
+
+                </div>
+
+
+                <!-- ÜRÜNLER -->
+                <div class="col-md-4 pt-5">
+
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">
+                        Ürünler
+                    </h2>
+
+                    <ul class="list-unstyled text-light footer-link-list">
+
+                        <li>
+                            <a class="text-decoration-none"
+                               asp-area=""
+                               asp-controller="Product"
+                               asp-action="Index">
+                                Tüm Ürünler
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- SAYFALAR -->
+                <div class="col-md-4 pt-5">
+
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">
+                        Sayfalar
+                    </h2>
+
+                    <ul class="list-unstyled text-light footer-link-list">
+
+                        <li>
+                            <a class="text-decoration-none"
+                               asp-area=""
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Ana Sayfa
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="text-decoration-none"
+                               asp-area=""
+                               asp-controller="Home"
+                               asp-action="About">
+                                Hakkımızda
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="text-decoration-none"
+                               asp-area=""
+                               asp-controller="Home"
+                               asp-action="Contact">
+                                İletişim
+                            </a>
+                        </li>
+
+                        @if (User.Identity?.IsAuthenticated == true &&
+                             User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a class="text-decoration-none text-success"
+                                   asp-area="Admin"
+                                   asp-controller="Home"
+                                   asp-action="Index">
+
+                                    Admin Paneli
+
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="w-100 bg-black py-3 mt-4">
+
+            <div class="container">
+
+                <p class="text-left text-light mb-0">
+
+                    © @DateTime.Now.Year FeyzaStore
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="~/assets/js/jquery-1.11.0.min.js"></script>
+
+    <script src="~/assets/js/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/assets/js/templatemo.js"></script>
+
+    <script src="~/assets/js/custom.js"></script>
+
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false
+    )
+
+</body>
+
+</html>

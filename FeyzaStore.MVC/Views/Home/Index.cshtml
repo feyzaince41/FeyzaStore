@@ -1,0 +1,325 @@
+﻿@model List<FeyzaStore.MVC.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<!-- ========================= -->
+<!-- BANNER -->
+<!-- ========================= -->
+
+<div id="template-mo-zay-hero-carousel"
+     class="carousel slide"
+     data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+
+            <div class="container">
+                <div class="row p-5 align-items-center">
+
+                    <!-- Banner Fotoğrafı -->
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+
+                        <img class="img-fluid"
+                             src="~/assets/img/banner_img_01.jpg"
+                             alt="FeyzaStore">
+
+                    </div>
+
+                    <!-- Banner Yazıları -->
+                    <div class="col-lg-6 mb-0">
+
+                        <div>
+
+                            <h1 class="h1 text-success fw-bold">
+                                FeyzaStore
+                            </h1>
+
+                            <h2 class="h2 mb-3">
+                                Tarzını Keşfet
+                            </h2>
+
+                            <p class="text-muted mb-4">
+                                FeyzaStore'a hoş geldiniz.
+                                Yeni sezon kadın, erkek ve aksesuar
+                                koleksiyonlarımızı keşfedin.
+                            </p>
+
+                            <a asp-controller="Product"
+                               asp-action="Index"
+                               class="btn btn-success px-4 py-2">
+
+                                Alışverişe Başla
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- ========================= -->
+<!-- KATEGORİLER -->
+<!-- ========================= -->
+
+<section class="container py-5">
+
+    <div class="row text-center pt-3">
+
+        <div class="col-lg-6 m-auto">
+
+            <h1 class="h1 fw-bold">
+                Kategoriler
+            </h1>
+
+            <p class="text-muted">
+                Tarzına uygun ürünleri keşfet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <!-- Kadın Giyim -->
+
+        <div class="col-12 col-md-4 p-5 mt-3">
+
+            <img src="~/assets/img/category_img_01.jpg"
+                 class="rounded-circle img-fluid border"
+                 alt="Kadın Giyim">
+
+            <h5 class="text-center mt-3 mb-3">
+                Kadın Giyim
+            </h5>
+
+            <p class="text-center">
+
+                <a asp-controller="Product"
+                   asp-action="Index"
+                   class="btn btn-success">
+
+                    Ürünleri Gör
+
+                </a>
+
+            </p>
+
+        </div>
+
+
+        <!-- Erkek Giyim -->
+
+        <div class="col-12 col-md-4 p-5 mt-3">
+
+            <img src="~/assets/img/category_img_02.jpg"
+                 class="rounded-circle img-fluid border"
+                 alt="Erkek Giyim">
+
+            <h5 class="text-center mt-3 mb-3">
+                Erkek Giyim
+            </h5>
+
+            <p class="text-center">
+
+                <a asp-controller="Product"
+                   asp-action="Index"
+                   class="btn btn-success">
+
+                    Ürünleri Gör
+
+                </a>
+
+            </p>
+
+        </div>
+
+
+        <!-- Aksesuar -->
+
+        <div class="col-12 col-md-4 p-5 mt-3">
+
+            <img src="~/assets/img/category_img_03.jpg"
+                 class="rounded-circle img-fluid border"
+                 alt="Aksesuar">
+
+            <h5 class="text-center mt-3 mb-3">
+                Aksesuar
+            </h5>
+
+            <p class="text-center">
+
+                <a asp-controller="Product"
+                   asp-action="Index"
+                   class="btn btn-success">
+
+                    Ürünleri Gör
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- ÖNE ÇIKAN ÜRÜNLER -->
+<!-- ========================= -->
+
+<section class="bg-light">
+
+    <div class="container py-5">
+
+        <!-- Başlık -->
+
+        <div class="row text-center py-3">
+
+            <div class="col-lg-6 m-auto">
+
+                <h1 class="h1 fw-bold">
+                    Öne Çıkan Ürünler
+                </h1>
+
+                <p class="text-muted">
+                    FeyzaStore'un öne çıkan ürünlerini keşfet.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Ürünler -->
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-info text-center">
+                Henüz ürün bulunmamaktadır.
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+
+                @foreach (var product in Model)
+                {
+                    <div class="col-12 col-md-6 col-lg-4">
+
+                        <div class="card h-100 border-0 shadow-sm">
+
+                            <!-- Ürün Görseli -->
+
+                            <a asp-controller="Product"
+                               asp-action="Detail"
+                               asp-route-id="@product.Id"
+                               class="text-decoration-none">
+
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <div class="bg-white d-flex align-items-center justify-content-center"
+                                         style="height:320px; padding:20px;">
+
+                                        <img src="@($"https://localhost:7108{product.ImageUrl}")"
+                                             alt="@product.Name"
+                                             style="
+                                                width:100%;
+                                                height:100%;
+                                                object-fit:contain;
+                                             " />
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="bg-white d-flex align-items-center justify-content-center"
+                                         style="height:320px;">
+
+                                        <span class="text-muted">
+                                            Ürün görseli yok
+                                        </span>
+
+                                    </div>
+                                }
+
+                            </a>
+
+
+                            <!-- Ürün Bilgileri -->
+
+                            <div class="card-body d-flex flex-column">
+
+                                <!-- Kategori -->
+
+                                <small class="text-success mb-2">
+                                    @product.CategoryName
+                                </small>
+
+
+                                <!-- Ürün Adı -->
+
+                                <h5 class="card-title fw-bold">
+                                    @product.Name
+                                </h5>
+
+
+                                <!-- Açıklama -->
+
+                                <p class="card-text text-muted">
+                                    @product.Description
+                                </p>
+
+
+                                <!-- Alt Bölüm -->
+
+                                <div class="mt-auto">
+
+                                    <!-- Fiyat -->
+
+                                    <h5 class="text-success fw-bold mb-3">
+
+                                        @product.Price.ToString("N2") TL
+
+                                    </h5>
+
+
+                                    <!-- Ürünü İncele -->
+
+                                    <a asp-controller="Product"
+                                       asp-action="Detail"
+                                       asp-route-id="@product.Id"
+                                       class="btn btn-outline-success w-100">
+
+                                        Ürünü İncele
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+
+    </div>
+
+</section>

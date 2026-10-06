@@ -1,0 +1,6 @@
+@FeyzaStore.API_HostAddress = http://localhost:5196
+
+GET {{FeyzaStore.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1>FeyzaStore Admin Paneli</h1>
+        <p class="text-muted">
+            Mağaza yönetim işlemlerini buradan yapabilirsiniz.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <!-- KATEGORİ YÖNETİMİ -->
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm text-center p-4 h-100">
+
+                <h4>Kategori Yönetimi</h4>
+
+                <p class="text-muted">
+                    Kategorileri ekleyebilir, güncelleyebilir ve silebilirsiniz.
+                </p>
+
+                <div class="mt-auto">
+                    <a asp-area="Admin"
+                       asp-controller="Category"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Kategorileri Yönet
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ÜRÜN YÖNETİMİ -->
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm text-center p-4 h-100">
+
+                <h4>Ürün Yönetimi</h4>
+
+                <p class="text-muted">
+                    Ürünleri ve ürün görsellerini yönetebilirsiniz.
+                </p>
+
+                <div class="mt-auto">
+                    <a asp-area="Admin"
+                       asp-controller="Product"
+                       asp-action="Index"
+                       class="btn btn-success">
+                        Ürünleri Yönet
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- KULLANICI YÖNETİMİ -->
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm text-center p-4 h-100">
+
+                <h4>Kullanıcı Yönetimi</h4>
+
+                <p class="text-muted">
+                    Kayıtlı kullanıcıları görüntüleyebilir ve
+                    Admin yetkilerini yönetebilirsiniz.
+                </p>
+
+                <div class="mt-auto">
+                    <a asp-area="Admin"
+                       asp-controller="User"
+                       asp-action="Index"
+                       class="btn btn-warning">
+                        Kullanıcıları Yönet
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

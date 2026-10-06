@@ -1,0 +1,107 @@
+﻿@model List<FeyzaStore.MVC.Models.AdminUserViewModel>
+
+@{
+    ViewData["Title"] = "Kullanıcı Yönetimi";
+}
+
+<div class="container py-5">
+
+    <h2 class="mb-4">
+        Kullanıcı Yönetimi
+    </h2>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Kullanıcı Adı</th>
+                        <th>E-posta</th>
+                        <th>Rol</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @user.UserName
+                            </td>
+
+                            <td>
+                                @user.Email
+                            </td>
+
+                            <td>
+                                @if (user.IsAdmin)
+                                {
+                                    <span class="badge bg-success">
+                                        Admin
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">
+                                        Kullanıcı
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+
+                                @if (!user.IsAdmin)
+                                {
+                                    <form asp-area="Admin"
+                                          asp-controller="User"
+                                          asp-action="MakeAdmin"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@user.Id" />
+
+                                        <button type="submit"
+                                                class="btn btn-success btn-sm">
+                                            Admin Yap
+                                        </button>
+
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-area="Admin"
+                                          asp-controller="User"
+                                          asp-action="RemoveAdmin"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@user.Id" />
+
+                                        <button type="submit"
+                                                class="btn btn-outline-danger btn-sm">
+                                            Admin Yetkisini Kaldır
+                                        </button>
+
+                                    </form>
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>

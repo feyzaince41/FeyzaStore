@@ -1,0 +1,30 @@
+﻿@model FeyzaStore.MVC.Models.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Kategori Güncelle";
+}
+
+<div class="container mt-5">
+
+    <h2>Kategori Güncelle</h2>
+
+    <form asp-area="Admin"
+          asp-controller="Category"
+          asp-action="Edit"
+          method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Name">Kategori Adı</label>
+            <input asp-for="Name" class="form-control" />
+<span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Güncelle
+        </button>
+
+    </form>
+
+</div>

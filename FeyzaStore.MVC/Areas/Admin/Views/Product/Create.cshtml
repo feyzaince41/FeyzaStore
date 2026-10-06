@@ -1,0 +1,62 @@
+﻿@model FeyzaStore.MVC.Models.ProductCreateViewModel
+
+@{
+    ViewData["Title"] = "Yeni Ürün Ekle";
+}
+
+<div class="container mt-5">
+
+    <h2>Yeni Ürün Ekle</h2>
+
+    <form asp-area="Admin"
+          asp-controller="Product"
+          asp-action="Create"
+          method="post">
+
+        <div class="mb-3">
+            <label asp-for="Name">Ürün Adı</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description">Açıklama</label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price">Fiyat</label>
+            <input asp-for="Price" class="form-control" />
+<span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Stock">Stok</label>
+            <input asp-for="Stock" class="form-control" />
+<span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+    <label asp-for="CategoryId">Kategori</label>
+
+    <select asp-for="CategoryId" class="form-control">
+<span asp-validation-for="CategoryId" class="text-danger"></span>
+        <option value="">Kategori Seçiniz</option>
+
+        @foreach (var category in Model.Categories)
+        {
+            <option value="@category.Id">
+                @category.Name
+            </option>
+        }
+    </select>
+</div>
+
+        <button type="submit" class="btn btn-primary">
+            Kaydet
+        </button>
+
+    </form>
+
+</div>

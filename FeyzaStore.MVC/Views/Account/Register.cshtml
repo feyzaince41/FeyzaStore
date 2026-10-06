@@ -1,0 +1,123 @@
+﻿@model FeyzaStore.MVC.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+
+                    <h2 class="mb-4 text-center">
+                        Kayıt Ol
+                    </h2>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.Error
+                        </div>
+                    }
+
+                    <form asp-controller="Account"
+                          asp-action="Register"
+                          method="post">
+
+                        <!-- KULLANICI ADI -->
+                        <div class="mb-3">
+
+                            <label asp-for="UserName"
+                                   class="form-label">
+                                Kullanıcı Adı
+                            </label>
+
+                            <input asp-for="UserName"
+                                   class="form-control"
+                                   placeholder="Kullanıcı adınızı girin" />
+
+                            <span asp-validation-for="UserName"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- E-POSTA -->
+                        <div class="mb-3">
+
+                            <label asp-for="Email"
+                                   class="form-label">
+                                E-posta
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control"
+                                   placeholder="E-posta adresinizi girin" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- ŞİFRE -->
+                        <div class="mb-3">
+
+                            <label asp-for="Password"
+                                   class="form-label">
+                                Şifre
+                            </label>
+
+                            <input asp-for="Password"
+                                   type="password"
+                                   class="form-control"
+                                   placeholder="Şifrenizi girin" />
+
+                            <span asp-validation-for="Password"
+                                  class="text-danger">
+                            </span>
+
+                            <div class="form-text mt-2">
+                                Şifreniz en az 6 karakter olmalı ve
+                                büyük harf, küçük harf ve özel karakter
+                                içermelidir.
+                            </div>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-success w-100">
+                            Kayıt Ol
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-4">
+
+                        <span class="text-muted">
+                            Zaten hesabınız var mı?
+                        </span>
+
+                        <a asp-controller="Account"
+                           asp-action="Login"
+                           class="text-success text-decoration-none">
+                            Giriş Yap
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

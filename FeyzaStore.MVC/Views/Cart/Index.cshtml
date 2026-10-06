@@ -1,0 +1,117 @@
+﻿@model FeyzaStore.MVC.Models.CartViewModel
+
+@{
+    ViewData["Title"] = "Sepetim";
+}
+
+<div class="container py-5">
+
+    <h1 class="mb-4">Sepetim</h1>
+    @foreach (var item in Model.Items)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row align-items-center">
+
+                    <div class="col-md-2">
+                        <img src="@($"https://localhost:7108{item.ImageUrl}")"
+                             class="img-fluid rounded"
+                             alt="@item.ProductName" />
+                    </div>
+
+                    <div class="col-md-10">
+                        <h5>@item.ProductName</h5>
+
+                        <p>
+                            Fiyat: @item.Price.ToString("N2") TL
+                        </p>
+
+                        <div class="d-flex align-items-center gap-2 mb-3">
+
+                            <form asp-controller="Cart"
+                                  asp-action="UpdateQuantity"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="cartItemId"
+                                       value="@item.Id" />
+
+                                <input type="hidden"
+                                       name="quantity"
+                                       value="@(item.Quantity - 1)" />
+
+                                <button type="submit"
+                                        class="btn btn-outline-secondary">
+                                    -
+                                </button>
+
+                            </form>
+
+                            <strong>@item.Quantity</strong>
+
+                            <form asp-controller="Cart"
+                                  asp-action="UpdateQuantity"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="cartItemId"
+                                       value="@item.Id" />
+
+                                <input type="hidden"
+                                       name="quantity"
+                                       value="@(item.Quantity + 1)" />
+
+                                <button type="submit"
+                                        class="btn btn-outline-secondary">
+                                    +
+                                </button>
+
+                            </form>
+                            <form asp-controller="Cart"
+                                  asp-action="Remove"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="cartItemId"
+                                       value="@item.Id" />
+
+                                <button type="submit"
+                                        class="btn btn-danger">
+                                    Sil
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                        <p>
+                            <strong>Toplam:</strong>
+                            @((item.Price * item.Quantity).ToString("N2")) TL
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr />
+
+    <div class="text-end mt-4">
+        <h4>
+            Sepet Toplamı:
+            <span class="text-success">
+                @Model.Items.Sum(x => x.Price * x.Quantity).ToString("N2") TL
+            </span>
+        </h4>
+    </div>
+
+    <div class="text-end mt-3">
+        <a asp-controller="Checkout"
+           asp-action="Index"
+           class="btn btn-success btn-lg">
+            Siparişi Tamamla
+        </a>
+    </div>
+
+</div>

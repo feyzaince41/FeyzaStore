@@ -1,0 +1,63 @@
+﻿@model FeyzaStore.MVC.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Ürün Detayı";
+}
+
+<div class="container py-5">
+    <div class="row">
+
+        <!-- Ürün Fotoğrafı -->
+        <div class="col-md-6">
+            <img src="@($"https://localhost:7108{Model.ImageUrl}")"
+                 class="img-fluid rounded"
+                 alt="@Model.Name" />
+        </div>
+
+        <!-- Ürün Bilgileri -->
+        <div class="col-md-6">
+
+            <h1>@Model.Name</h1>
+
+            <h3 class="text-success">
+                @Model.Price.ToString("N2") TL
+            </h3>
+
+            <p>
+                <strong>Kategori:</strong>
+                @Model.CategoryName
+            </p>
+
+            <p>
+                <strong>Açıklama:</strong>
+                @Model.Description
+            </p>
+
+            <p>
+                <strong>Stok:</strong>
+                @Model.Stock adet
+            </p>
+
+            <form asp-controller="Cart"
+                  asp-action="Add"
+                  method="post">
+
+                <input type="hidden"
+                       name="productId"
+                       value="@Model.Id" />
+
+                <input type="hidden"
+                       name="quantity"
+                       value="1" />
+
+                <button type="submit"
+                        class="btn btn-success">
+                    Sepete Ekle
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
