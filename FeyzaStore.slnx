@@ -1,7 +1,0 @@
-<Solution>
-  <Project Path="FeyzaStore.API/FeyzaStore.API.csproj" />
-  <Project Path="FeyzaStore.Application/FeyzaStore.Application.csproj" />
-  <Project Path="FeyzaStore.Domain/FeyzaStore.Domain.csproj" />
-  <Project Path="FeyzaStore.Infrastructure/FeyzaStore.Infrastructure.csproj" />
-  <Project Path="FeyzaStore.MVC/FeyzaStore.MVC.csproj" />
-</Solution>
